@@ -1,12 +1,10 @@
 import { notFound } from 'next/navigation';
 import { serviceCategories } from '@/lib/services/data/categories';
 import { ServiceList } from '@/components/services/service-list';
-
-// Import the correct types from Next.js
 import { Metadata } from 'next';
 
-// Update the props type to match Next.js requirements
-interface PageProps {
+// Update to use the correct Next.js types
+type Props = {
   params: {
     category: string;
   };
@@ -19,12 +17,8 @@ export async function generateStaticParams() {
   }));
 }
 
-// Update the component signature
-export default async function CategoryPage({
-  params,
-  searchParams,
-}: PageProps) {
-  const categoryData = serviceCategories.find((cat) => cat.id === params.category);
+export default async function CategoryPage(props: Props) {
+  const categoryData = serviceCategories.find((cat) => cat.id === props.params.category);
 
   if (!categoryData) {
     notFound();
@@ -41,9 +35,8 @@ export default async function CategoryPage({
   );
 }
 
-// Optionally, you can also add metadata
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const category = serviceCategories.find((cat) => cat.id === params.category);
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const category = serviceCategories.find((cat) => cat.id === props.params.category);
   
   return {
     title: category ? `${category.name} | Your Salon Name` : 'Category Not Found',
