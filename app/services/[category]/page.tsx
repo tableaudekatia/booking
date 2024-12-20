@@ -2,17 +2,23 @@ import { notFound } from 'next/navigation';
 import { serviceCategories } from '@/lib/services/data/categories';
 import { ServiceList } from '@/components/services/service-list';
 
+// Define the correct type for the params
+type CategoryPageProps = {
+  params: {
+    category: string;
+  };
+};
+
 export async function generateStaticParams() {
   return serviceCategories.map((category) => ({
     category: category.id,
   }));
 }
 
-export default function CategoryPage({
+// Add the type to the component
+export default async function CategoryPage({
   params: { category },
-}: {
-  params: { category: string };
-}) {
+}: CategoryPageProps) {
   const categoryData = serviceCategories.find((cat) => cat.id === category);
 
   if (!categoryData) {
