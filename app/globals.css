@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: var(--font-cormorant);
+  --font-montserrat: var(--font-montserrat);
+}
+
+@layer base {
+  body {
+    @apply text-white bg-black font-montserrat;
+  }
+}
+
+@layer components {
+  .heading-xl {
+    @apply font-cormorant text-6xl md:text-7xl lg:text-8xl font-light tracking-tight;
+  }
+  
+  .heading-lg {
+    @apply font-cormorant text-4xl md:text-5xl lg:text-6xl font-light;
+  }
+  
+  .body-text {
+    @apply font-montserrat text-base leading-relaxed;
+  }
+  
+  .gold-gradient {
+    @apply bg-gradient-to-r from-gold-300 via-gold-400 to-gold-500 bg-clip-text text-transparent;
+  }
+}
+
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
